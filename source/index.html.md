@@ -26,7 +26,33 @@ This example API documentation page was created with [Slate](https://github.com/
 
 # Summary Composition
 
-To create a daily summary for a revenue cloud app you will need to understand some concepts. 
+To create a daily summary for a revenue cloud app you will need to understand some concepts.
+
+## Which orders do we summarize?
+
+We are doing accrual accounting which means that we summarize for the day the payment was made against the order.  Often this required pulling the payments first and then backing into the orders.  Or pulling orders which are completed or paid.  
+
+In addition returns processed on the summary date are also included so finding financial transactions that were money returned will then surface the retur order depending on the system.  
+
+## Sales Tax Node
+```javascript
+  { 
+        "rate": 0.08875,
+        "label": "US-NY-Sales Tax 8.875%-8.87500",
+        "amount": 226.85,
+        "taxablesales": 2556.06
+      }
+```
+
+Sales tax is broken down in the `subcategories` node as follows:
+
+* `rate` is decimal format out to 5 digits and comes from the source system
+* `label` should follow this format `{2 char country code}-{2 char province/state code}-{Name Here}-{rate as percentage to 5 digits}` where the first 2 characters are the country code, the next 2 are a province code and the next is the name from the source system and finally the rate as a percentage.  
+* `amount` is the actual amount from the source system grouped by the label above.
+* `taxablesales` is calculated as `amount  / rate` and should be rounded to 2 digits. 
+
+
+
 
 ```javascript
  {
