@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>bookkeep.com API Reference</title>
 
     <style media="screen">
       .highlight table td { padding: 5px; }
@@ -291,7 +291,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -302,9 +302,6 @@
       <img src="images/logo-1e815a84.png" class="logo" alt="" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -313,6 +310,9 @@
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#summary-composition" class="toc-h1 toc-link" data-title="Summary Composition">Summary Composition</a>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -344,12 +344,84 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the documentation for bookkeep.com&#39;s accounting integration platform.  </p>
 
 <p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
 <p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<h1 id='summary-composition'>Summary Composition</h1>
+<p>To create a daily summary for a revenue cloud app you will need to understand some concepts. </p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">inputs</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">testing</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">journal_entry_template</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my_summary</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">je_date</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2021-01-29</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">je_type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my_summary</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">currency</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">USD</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">realm_id</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">9130348211837726</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">docnumber</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BKShopSum2901214584</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">api_version</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2020-02-04</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">build_number</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.1.383</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">bk_external_id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">4584</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">source_report_url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my-source-system.com/comapre-numbers-to-this-report.html</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">je_private_note</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">note to pass through to accounting system</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">gross_sales</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">},</span>
+   <span class="dl">"</span><span class="s2">shipping_income</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">discounts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">returns</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">gift_cards_issued</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">gratuity_collected</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">sales_tax_collected</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">manual_payments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">paypal_payments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">shopify_payments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">label</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Today Batch</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">label</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Tomorrow Batch</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">unknown_payments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">gift_tender_total</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">third_party_gateway_payments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">subcategories</span><span class="dl">"</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
@@ -585,9 +657,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
