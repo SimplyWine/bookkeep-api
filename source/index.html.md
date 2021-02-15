@@ -1,11 +1,8 @@
 ---
-title: API Reference
+title: bookkeep.com API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -21,11 +18,89 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the documentation for bookkeep.com's accounting integration platform.  
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+
+# Summary Composition
+
+To create a daily summary for a revenue cloud app you will need to understand some concepts. 
+
+```javascript
+ {
+  "inputs": {
+    "testing": false,
+    "journal_entry_template": "my_summary"
+  },
+  "je_date": "2021-01-29",
+  "je_type": "my_summary",
+  "currency": "USD",
+  "realm_id": "9130348211837726",
+  "docnumber": "BKShopSum2901214584",
+  "api_version": "2020-02-04",
+  "build_number": "0.1.383",
+  "bk_external_id": 4584,
+  "source_report_url": "my-source-system.com/comapre-numbers-to-this-report.html",
+  "je_private_note": "note to pass through to accounting system",
+  "gross_sales": {
+    "amount": 0,
+    "subcategories": []
+  },
+   "shipping_income": {
+    "amount": 0
+  },
+  "discounts": {
+    "amount": 0,
+    "subcategories": []
+  },
+  "returns": {
+    "amount": 0
+  },
+  "gift_cards_issued": {
+    "amount": 0
+  },
+  "gratuity_collected": {
+    "amount": 0
+  },
+  "sales_tax_collected": {
+    "amount": 0,
+    "subcategories": []
+  },
+  "manual_payments": {
+    "amount": 0,
+    "subcategories": []
+  },
+  "paypal_payments": {
+    "amount": 0
+  },
+  "shopify_payments": {
+    "amount": 0,
+    "subcategories": [
+      {
+        "label": "Today Batch",
+        "amount": 0
+      },
+      {
+        "label": "Tomorrow Batch",
+        "amount": 0
+      }
+    ]
+  },
+  "unknown_payments": {
+    "amount": 0
+  },
+  "gift_tender_total": {
+    "amount": 0
+  },
+  "third_party_gateway_payments": {
+    "amount": 0,
+    "subcategories": []
+  }
+}
+  ```
+
 
 # Authentication
 
