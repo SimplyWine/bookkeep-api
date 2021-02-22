@@ -313,6 +313,14 @@
           </li>
           <li>
             <a href="#summary-composition" class="toc-h1 toc-link" data-title="Summary Composition">Summary Composition</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#which-orders-do-we-summarize" class="toc-h2 toc-link" data-title="Which orders do we summarize?">Which orders do we summarize?</a>
+                  </li>
+                  <li>
+                    <a href="#sales-tax-node" class="toc-h2 toc-link" data-title="Sales Tax Node">Sales Tax Node</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
@@ -350,7 +358,26 @@
 
 <p>This example API documentation page was created with <a href="https://github.com/slatedocs/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
 <h1 id='summary-composition'>Summary Composition</h1>
-<p>To create a daily summary for a revenue cloud app you will need to understand some concepts. </p>
+<p>To create a daily summary for a revenue cloud app you will need to understand some concepts.</p>
+<h2 id='which-orders-do-we-summarize'>Which orders do we summarize?</h2>
+<p>We are doing accrual accounting which means that we summarize for the day the payment was made against the order.  Often this required pulling the payments first and then backing into the orders.  Or pulling orders which are completed or paid.  </p>
+
+<p>In addition returns processed on the summary date are also included so finding financial transactions that were money returned will then surface the retur order depending on the system.  </p>
+<h2 id='sales-tax-node'>Sales Tax Node</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code>  <span class="p">{</span> 
+        <span class="dl">"</span><span class="s2">rate</span><span class="dl">"</span><span class="p">:</span> <span class="mf">0.08875</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">label</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">US-NY-Sales Tax 8.875%-8.87500</span><span class="dl">"</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">amount</span><span class="dl">"</span><span class="p">:</span> <span class="mf">226.85</span><span class="p">,</span>
+        <span class="dl">"</span><span class="s2">taxablesales</span><span class="dl">"</span><span class="p">:</span> <span class="mf">2556.06</span>
+      <span class="p">}</span>
+</code></pre></div>
+<p>Sales tax is broken down in the <code>subcategories</code> node as follows:</p>
+
+<ul>
+<li><code>rate</code> is decimal format out to 5 digits and comes from the source system</li>
+<li><code>label</code> should follow this format <code>{2 char country code}-{2 char province/state code}-{Name Here}-{rate as percentage to 5 digits}</code> where the first 2 characters are the country code, the next 2 are a province code and the next is the name from the source system and finally the rate as a percentage.<br></li>
+<li><code>amount</code> is the actual amount from the source system grouped by the label above.</li>
+<li><code>taxablesales</code> is calculated as <code>amount  / rate</code> and should be rounded to 2 digits. </li>
+</ul>
 <div class="highlight"><pre class="highlight javascript tab-javascript"><code> <span class="p">{</span>
   <span class="dl">"</span><span class="s2">inputs</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
     <span class="dl">"</span><span class="s2">testing</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
