@@ -83,7 +83,7 @@ The first part of the string is the `input.journal_entry_template`
 
 Next is the unique `input.bk_organization_id`
 
-Then a connection id or store domain from `inputs.domain` or `inputs.connection_id`
+Then a connection id or store domain from `inputs.domain` or `inputs.connection_id` do not inlude `https` or `:` or `\\` in this string or it will break.  
 
 Next comes the report date in iso format eg. `2021-02-01`
 
