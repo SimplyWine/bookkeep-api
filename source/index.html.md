@@ -34,6 +34,12 @@ We are doing accrual accounting which means that we summarize for the day the pa
 
 In addition returns processed on the summary date are also included so finding financial transactions that were money returned will then surface the retur order depending on the system.  
 
+### Grouping of summaries
+
+There are 2 ways we group summaries.  
+- Currency
+- Channel
+
 ## Sales Tax Node
 ```javascript
   { 
@@ -44,7 +50,7 @@ In addition returns processed on the summary date are also included so finding f
       }
 ```
 
-Sales tax is broken down in the `subcategories` node as follows:
+Sales tax is broken down and summarized by the label groups in the `subcategories` node as follows:
 
 * `rate` is decimal format out to 5 digits and comes from the source system
 * `label` should follow this format `{2 char country code}-{2 char province/state code}-{Name Here}-{rate as percentage to 5 digits}` where the first 2 characters are the country code, the next 2 are a province code and the next is the name from the source system and finally the rate as a percentage.  
@@ -94,35 +100,15 @@ Sales tax is broken down in the `subcategories` node as follows:
     "amount": 0,
     "subcategories": []
   },
-  "manual_payments": {
+  "stripe_payments": {
     "amount": 0,
     "subcategories": []
   },
-  "paypal_payments": {
+  "other_payments": {
     "amount": 0
   },
-  "shopify_payments": {
-    "amount": 0,
-    "subcategories": [
-      {
-        "label": "Today Batch",
-        "amount": 0
-      },
-      {
-        "label": "Tomorrow Batch",
-        "amount": 0
-      }
-    ]
-  },
-  "unknown_payments": {
+  "gift_cards_redeemed": {
     "amount": 0
-  },
-  "gift_tender_total": {
-    "amount": 0
-  },
-  "third_party_gateway_payments": {
-    "amount": 0,
-    "subcategories": []
   }
 }
   ```
