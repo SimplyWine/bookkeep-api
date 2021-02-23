@@ -241,7 +241,10 @@ taxablesales | calculated as `amount  / rate` and should be rounded to 2 digits.
 
 
 
-##
+## Test Posting
+
+When you have created your summary you can post tests to this api for inspection.
+`https://ennl614nlxp5g.x.pipedream.net`
 
 <aside class="warning">Everything below here is not finished yet.</aside>
 
