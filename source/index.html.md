@@ -30,6 +30,10 @@ To create a daily summary for a revenue cloud app you will need to understand so
 
 We are doing accrual accounting which means that we summarize for the day the payment was made against the order.  Often this required pulling the payments first and then backing into the orders.  Or pulling orders which are completed or paid.  
 
+<aside class="notice">
+When pulling orders always round on the line item level before adding. If you are capturing line items of quantity * price you need to round for each line before adding.  Always round to 2 digits.  Never add or subtrack up a column of totals without first rounding each field to 2 digits.  
+</aside>
+
 Any returns or exchanges processed on the summary date are also included since they have a finanical impact on that summary date.  
 
 This means pulling any orders modified on the summary date to find refunds or exchanges.  Or else looking at the finanical transactions to find orders updated that day. 
@@ -41,7 +45,7 @@ Also note that if an order has not been paid for meaning it's pending or similia
 There are 2 ways we group summaries.
 
 1. Currency - Journal entries required a single currency. 
-2. Channel - Channel is sent as an option in the input to specify a channel or groups of channels to include in the summary.
+2. Channel - Channel is sent as an option in the input to specify a channel or groups of channels to include in the summary. This could be a store_id or name of a channel.  
 
 ## json Body
 ```javascript
@@ -184,10 +188,20 @@ Things to note:
   `income + libilities = payments`
 </aside>
 
+## Swedish Rounding
+
+In countries like canada where change doesn't go to the penny and swedish rounding is used we put the `swedish_rounding` amount into the discounts `subcatgegories` and into the discount amount. 
+
+<aside class="notice">
+You should build tests on your `post_raw_data` field to check numbers before you send.  
+</aside>
+
+
 Test to build:
 
 1. Each subcategory node must equal or be less than the higher level `amount` it can never sum to more or the posting will break.
 1. The finanical numbers should balance in the format `income + libilities = payments`
+1. Make sure all subcategories amounts sum to equal or less than the higher level `amount`.  They can never be more.  In addition negative numbers in the subcategories should rarely happen.  Only for sales tax.  
 
 
 
@@ -217,7 +231,7 @@ Test to build:
         "state": "CA",
         "amount": 12.54,
         "country": "US",
-        "taxablesales": 2508
+        "taxablesales": 2508.00
       },
       {
         "rate": 0.0025,
@@ -225,12 +239,16 @@ Test to build:
         "state": "CA",
         "amount": 16.27,
         "country": "US",
-        "taxablesales": 6508
+        "taxablesales": 6508.00
       }
   }
 ```
 
 Sales tax is broken down and summarized by the label groups in the `subcategories` node as follows:
+
+<aside class="notice">
+Always round to 2 digits.
+</aside>
 
 Name |  Description
 --------- | -----------
@@ -238,6 +256,8 @@ rate  | is decimal format out to 5 digits and comes from the source system
 label | should follow this format `{2 char country code}-{2 char province/state code}-{Name Here}-{rate as percentage to 5 digits}` where the first 2 characters are the country code, the next 2 are a province code and the next is the name from the source system and finally the rate as a percentage.
 amount | the actual amount from the source system grouped by the label above.
 taxablesales | calculated as `amount  / rate` and should be rounded to 2 digits.
+state | if a state or province code is available add that field
+country | if a country code is available add that field
 
 
 
