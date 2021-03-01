@@ -26,12 +26,44 @@ This example API documentation page was created with [Slate](https://github.com/
 
 To create a daily summary for a revenue cloud app you will need to understand some concepts.
 
+## Input tells your code what report to generate
+
+
+```javascript
+"inputs": {
+  "summary_date": "2021-02-19",
+  "bk_client_key": "jt-bottle-shop-2839@bookkeep.com",
+  "bk_organization_id": "9zOe70LNPwlN",
+  "square_location_id": "LST5S4CDVQVAC",
+  "bk_external_id": 5823,
+  "qbo_realm_id": "4fa9b94c-44b8-4ae5-b8b2-98ae807956a2",
+  "journal_entry_template": "square_summary",
+  "location": "",
+  "start_of_day": "2021-02-19T00:00:00-08:00",
+  "testing": true
+ }
+ ````
+We send an input which will give your code instruction on what to run.  
+
+Name |  Description
+--------- | -----------
+summary_date  | The report date for this report. Should be used to calcuate the `short_summary` date and also in `source_uuid` this is the date to be used. 
+bk_client_key | email address of the organizations inbox.  Not used in your code can be ignored.
+bk_organization_id | the unique id of the organization.  Is used in `source_uuid` 
+square_location_id | depending on the app this will indicate a unique location in the source system for your summary.
+bk_external_id | can be ignored
+qbo_realm_id | This represents the accounting connection and is passed back in `post_raw_data`
+journal_entry_template | This triggers which report summary you will run and post back
+location | A text field for the user to input what they want to call the report location.  Should be included in `short_summary`
+start_of_day | the beginning point of the 24 hour summary.  Includes timezone at time of report run.  However you should convert to the timezone of the source system account. 
+testing | if this report is for testing or live.  
+
 ## Which orders do we summarize?
 
 We are doing accrual accounting which means that we summarize for the day the payment was made against the order.  Often this required pulling the payments first and then backing into the orders.  Or pulling orders which are completed or paid.  
 
 <aside class="notice">
-When pulling orders always round on the line item level before adding. If you are capturing line items of quantity * price you need to round for each line before adding.  Always round to 2 digits.  Never add or subtrack up a column of totals without first rounding each field to 2 digits.  
+When pulling orders always round on the line item level before adding. If you are capturing line items of quantity * price you need to round for each line before adding.  Always round to 2 digits.  Never add up a column of totals without first rounding each field to 2 digits.  
 </aside>
 
 Any returns or exchanges processed on the summary date are also included since they have a finanical impact on that summary date.  
