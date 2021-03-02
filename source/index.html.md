@@ -34,7 +34,8 @@ To create a daily summary for a revenue cloud app you will need to understand so
   "summary_date": "2021-02-19",
   "bk_client_key": "jt-bottle-shop-2839@bookkeep.com",
   "bk_organization_id": "9zOe70LNPwlN",
-  "square_location_id": "LST5S4CDVQVAC",
+  "location_id": "LST5S4CDVQVAC",
+  "shop_domain": "my-shop-subdomain"
   "bk_external_id": 5823,
   "qbo_realm_id": "4fa9b94c-44b8-4ae5-b8b2-98ae807956a2",
   "journal_entry_template": "square_summary",
@@ -50,7 +51,8 @@ Name |  Description
 summary_date  | The report date for this report. Should be used to calcuate the `short_summary` date and also in `source_uuid` this is the date to be used. 
 bk_client_key | email address of the organizations inbox.  Not used in your code can be ignored.
 bk_organization_id | the unique id of the organization.  Is used in `source_uuid` 
-square_location_id | depending on the app this will indicate a unique location in the source system for your summary.
+location_id | depending on the app this will indicate a unique location in the source system for your summary.
+shop_domain | depending on the app this will indicate a unique shop name and is used in `source_uuid` and to create the `source_report_url`
 bk_external_id | can be ignored
 qbo_realm_id | This represents the accounting connection and is passed back in `post_raw_data`
 journal_entry_template | This triggers which report summary you will run and post back
@@ -88,7 +90,8 @@ There are 2 ways we group summaries.
   "bk_external_id": "inputs.bk_external_id",
   "short_summary": "Squarespace Summary Saturday, February 6th, 2021 ${{net_sales}}",
   "post_raw_data": {...},
-  "source_raw_data" {...}
+  "source_raw_data" {...},
+  "testing":true
 }
 ```
 
@@ -103,6 +106,7 @@ bk_external_id | true | another id usually sent in the input.
 short_summary | true | a human readable summary of what we are posting for email subject line and for reporting summary lines. It should start with the template name then the day of the week spelled out completely, then the Month and date.  Then the currency symbol for the summary and finally the NET sales or deposit amount or fees amount depending on template.
 post_raw_data | true | the main report and will be explained below.
 source_raw_data | true |  used for troubleshooting data it is a text field and can include things like the list of orderids, or calculation tests. Its for us to troubleshoot with live data so put anything in there that will help.  
+testing | true | When set to `true` you will a receive more detailed response with tests against the json body sent. Also when `true` the record will not be sent to accounting. 
 
 
 ## Source UUID
@@ -296,7 +300,22 @@ country | if a country code is available add that field
 ## Test Posting
 
 When you have created your summary you can post tests to this api for inspection.
-`https://ennl614nlxp5g.x.pipedream.net`
+`https://gateway.bookkeep.com/api/v1/posts`
+
+You will need to email the bookkeep team to request credentials.  
+
+```javscript
+{
+  "request": {
+    "url": "https://gateway.bookkeep.com/api/v1/posts",
+    "method": "POST",
+    "body": "...",
+    "headers": {
+      "Authorization": "Token mytoken, api_key=MY_API_KEY",
+      "Content-Type": "application/json",
+    }
+  }
+  ```
 
 <aside class="warning">Everything below here is not finished yet.</aside>
 
