@@ -129,7 +129,7 @@ Next comes the report date in iso format eg. `2021-02-01`
 
 then we include the 3 character currency code like `USD`
 
-And finally if the report is filtered to channels those channel ids should be appended to the end separated by `-`
+And finally if the report is filtered to channels those channel ids should be appended to the end separated by `-` but if no channels are in the input the dash should not display. 
 
 
 ## post_raw_data
