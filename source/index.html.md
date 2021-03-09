@@ -39,7 +39,7 @@ To create a daily summary for a revenue cloud app you will need to understand so
   "bk_external_id": 5823,
   "qbo_realm_id": "4fa9b94c-44b8-4ae5-b8b2-98ae807956a2",
   "journal_entry_template": "square_summary",
-  "location": "",
+  "location": "Boardwalk",
   "start_of_day": "2021-02-19T00:00:00-08:00",
   "testing": true
  }
@@ -88,7 +88,7 @@ There are 2 ways we group summaries.
   "journal_entry_template": "squarespace_summary",
   "source_uuid": "inputs.journal_entry_template + '-' + inputs.bk_organization_id + '-' + inputs.shop_domain + '-' + inputs.report_date +  inputs.channel_ids",
   "bk_external_id": "inputs.bk_external_id",
-  "short_summary": "Squarespace Summary Saturday, February 6th, 2021 ${{net_sales}}",
+  "short_summary": "Square Summary Boardwalk Saturday, February 6th, 2021 ${{net_sales}}",
   "post_raw_data": {...},
   "source_raw_data" {...},
   "testing":true
@@ -103,7 +103,7 @@ bk_organization_id  | true | is sent in the input to the job or else stored for 
 journal_entry_template | true | sent in the input and is the key that select which report to generate.  
 source_uuid | true | The unique key for the summary and must be composed properly. 
 bk_external_id | true | another id usually sent in the input.
-short_summary | true | a human readable summary of what we are posting for email subject line and for reporting summary lines. It should start with the template name then the day of the week spelled out completely, then the Month and date.  Then the currency symbol for the summary and finally the NET sales or deposit amount or fees amount depending on template.
+short_summary | true | a human readable summary of what we are posting for email subject line and for reporting summary lines. It should start with the template name then `location` from `input` the day of the week spelled out completely, then the Month and date.  Then the currency symbol for the summary and finally the NET sales or deposit amount or fees amount depending on template. Be sure your date is formatted as shown with commas.  Also be very sure to use `input` currency and 2 digits after decimal. 
 post_raw_data | true | the main report and will be explained below.
 source_raw_data | true |  used for troubleshooting data it is a text field and can include things like the list of orderids, or calculation tests. Its for us to troubleshoot with live data so put anything in there that will help.  
 testing | true | When set to `true` you will a receive more detailed response with tests against the json body sent. Also when `true` the record will not be sent to accounting. 
