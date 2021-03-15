@@ -60,6 +60,10 @@ location | A text field for the user to input what they want to call the report 
 start_of_day | the beginning point of the 24 hour summary.  Includes timezone at time of report run.  However you should convert to the timezone of the source system account. 
 testing | if this report is for testing or live.  
 
+<aside class="notice">
+The timezone in the input is the timezone that should be used to pull the 24 hour period.  The `start_of_day` is the beginning of the 24 hour period to query. Sometimes the input timezone will be incorrect.  Should the source system have a timezone setting you should update the timezone to match the source system timezone otherwise use the input timezone given.
+</aside>
+
 ## Which orders do we summarize?
 
 We are doing accrual accounting which means that we summarize for the day the payment was made against the order.  Often this required pulling the payments first and then backing into the orders.  Or pulling orders which are completed or paid.  
@@ -123,7 +127,7 @@ The first part of the string is the `input.journal_entry_template`
 
 Next is the unique `input.bk_organization_id`
 
-Then a connection id or store domain from `inputs.domain` or `inputs.connection_id` do not inlude `https` or `:` or `\\` in this string or it will break.  
+Then a connection id or store domain from `inputs.domain` or `inputs.connection_id` do not inlude `https` or `:` or `\\` in this string or it will break. If the posting is a payout or deposit it should include the unique ID for the deposit or payout.  
 
 Next comes the report date in iso format eg. `2021-02-01`
 
@@ -318,6 +322,15 @@ You will need to email the bookkeep team to request credentials.
   ```
 
 <aside class="warning">Everything below here is not finished yet.</aside>
+
+# Deposit Composition
+
+<aside class="notice">
+A deposit is the same as a settlement or a payout.  We use those words interchangably. 
+</aside>
+
+A deposit is an accounting posting that needs to match to the bank account.
+
 
 
 # Authentication
