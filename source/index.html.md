@@ -78,6 +78,10 @@ This means pulling any orders modified on the summary date to find refunds or ex
 
 Also note that if an order has not been paid for meaning it's pending or similiar status then it should be ignored in the financial summary.  
 
+<aside class="notice">
+What if no orders, refunds or exchanges are found durning the time period?  In this situation we want the user to know our system ran propelry for the time period so post an entry to the gateway with `post_raw_data` with a 0 for each top line node `amount`
+</aside>
+
 ### Grouping of summaries
 
 There are 2 ways we group summaries.
@@ -111,6 +115,9 @@ short_summary | true | a human readable summary of what we are posting for email
 post_raw_data | true | the main report and will be explained below.
 source_raw_data | true |  used for troubleshooting data it is a text field and can include things like the list of orderids, or calculation tests. Its for us to troubleshoot with live data so put anything in there that will help.  
 testing | true | When set to `true` you will a receive more detailed response with tests against the json body sent. Also when `true` the record will not be sent to accounting. 
+attachments | false | an array of object which are attachment data [body,content_type,file_name]
+
+
 
 
 ## Source UUID
@@ -131,7 +138,9 @@ Then a connection id or store domain from `inputs.domain` or `inputs.connection_
 
 Next comes the report date in iso format eg. `2021-02-01`
 
-then we include the 3 character currency code like `USD`
+then we include the 3 character currency code in ISO format `USD`
+
+Options: AED, AFN, ALL, AMD, ANG, AOA, ARS, AUD, AWG, AZN, BAM, BBD, BDT, BGN, BHD, BIF, BMD, BND, BOB, BRL, BSD, BTC, BTN, BWP, BYR, BZD, CAD, CDF, CHF, CLP, CNY, COP, CRC, CUC, CUP, CVE, CZK, DJF, DKK, DOP, DZD, EGP, ERN, ETB, EUR, FJD, FKP, GBP, GEL, GGP, GHS, GIP, GMD, GNF, GTQ, GYD, HKD, HNL, HRK, HTG, HUF, IDR, ILS, IMP, INR, IQD, IRR, IRT, ISK, JEP, JMD, JOD, JPY, KES, KGS, KHR, KMF, KPW, KRW, KWD, KYD, KZT, LAK, LBP, LKR, LRD, LSL, LYD, MAD, MDL, MGA, MKD, MMK, MNT, MOP, MRO, MUR, MVR, MWK, MXN, MYR, MZN, NAD, NGN, NIO, NOK, NPR, NZD, OMR, PAB, PEN, PGK, PHP, PKR, PLN, PRB, PYG, QAR, RON, RSD, RUB, RWF, SAR, SBD, SCR, SDG, SEK, SGD, SHP, SLL, SOS, SRD, SSP, STD, SYP, SZL, THB, TJS, TMT, TND, TOP, TRY, TTD, TWD, TZS, UAH, UGX, USD, UYU, UZS, VEF, VND, VUV, WST, XAF, XCD, XOF, XPF, YER, ZAR and ZMW. Default is USD.
 
 And finally if the report is filtered to channels those channel ids should be appended to the end separated by `-` but if no channels are in the input the dash should not display. 
 
@@ -203,6 +212,22 @@ Things to note:
 1. The financial numbers can have different names but mostly we standardize on `gross_sales`, `discounts`, `returns`, `gift_cards_issued`, `gift_cards_redeemed`, `sales_tax_collected`, `gratuity_collected`, `other_payments`
 1. each financial node has `amount` and if subgroupings are present then `subcategories`
 1. If there are no grouping breakdowns under a node then `subcategories` should not display.
+
+Standardized fields:
+
+Name | Required? | Description
+--------- | ------- | -----------
+source_location_name  | true | The source system name for the location or channel or combination of both. 
+source_report_url | true | The report in the source system that corresponds to the data in the job summary. 
+je_private_note | true | could be '' but this is the note that passes through to the entry in accounting.
+inputs | true | the inputs to run your job excluding any access tokens.
+je_date | true | the report date from the input.  
+je_type | true | The template name from the input.
+currency | true | currency of the data summary
+realm_id | true | this is found in the input
+build_number | true | this is the code build that is running the job. 
+bk_external_id | true | from inputs
+
 
 ## Numbers should balance
 
@@ -329,7 +354,7 @@ You will need to email the bookkeep team to request credentials.
 A deposit is the same as a settlement or a payout.  We use those words interchangably. 
 </aside>
 
-A deposit is an accounting posting that needs to match to the bank account.
+A deposit is an accounting posting that needs to match to the bank account. The `bank_deposit` field in `post_raw_data` is the amount that will hit the bank account. There can be other fees lines and of course also the gross amount which we calculate for the `balance_reduction`.  
 
 
 
