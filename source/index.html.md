@@ -118,6 +118,9 @@ testing | true | When set to `true` you will a receive more detailed response wi
 attachments | false | an array of object which are attachment data [body,content_type,file_name]
 
 
+<aside class="notice">
+deposit not found should still create an entry in gateway with post_raw_data. The `source_uuid` will not have a deposit id which is ok.  The `post_raw_data` should show amount=0 and the  `short_summary` will say "no deposit today"  at the end.
+</aside>
 
 
 ## Source UUID
@@ -217,7 +220,8 @@ Standardized fields:
 
 Name | Required? | Description
 --------- | ------- | -----------
-source_location_name  | true | The source system name for the location or channel or combination of both. 
+source_location_name  | false | The source system name for the location or channel or combination of both if available 
+source_location_id | false | A location id in the source system for the name if available
 source_report_url | true | The report in the source system that corresponds to the data in the job summary. 
 je_private_note | true | could be '' but this is the note that passes through to the entry in accounting.
 inputs | true | the inputs to run your job excluding any access tokens.
@@ -356,7 +360,9 @@ A deposit is the same as a settlement or a payout.  We use those words interchan
 
 A deposit is an accounting posting that needs to match to the bank account. The `bank_deposit` field in `post_raw_data` is the amount that will hit the bank account. There can be other fees lines and of course also the gross amount which we calculate for the `balance_reduction`.  
 
+# Setup Script Composition
 
+The setup call helps get sub...
 
 # Authentication
 
