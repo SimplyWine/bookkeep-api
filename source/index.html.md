@@ -156,11 +156,13 @@ And finally if the report is filtered to channels those channel ids should be ap
   "je_type": "my_summary",
   "currency": "USD",
   "realm_id": "9130348211837726",
-  "docnumber": "BKShopSum2901214584",
+  "docnumber": "OptionalIfMultiplePostsOnSameDay",
   "api_version": "2020-02-04",
   "build_number": "0.1.383",
   "bk_external_id": 4584,
   "source_report_url": "my-source-system.com/comapre-numbers-to-this-report.html",
+  "source_location_name": "Name of this location from source system",
+  "source_location_id": "Source system id for this location",
   "je_private_note": "note to pass through to accounting system",
   "gross_sales": {
     "amount": 100.00,
@@ -224,6 +226,7 @@ source_location_name  | false | The source system name for the location or chann
 source_location_id | false | A location id in the source system for the name if available
 source_report_url | true | The report in the source system that corresponds to the data in the job summary. 
 je_private_note | true | could be '' but this is the note that passes through to the entry in accounting.
+docnumber | false | Optional field in case there are mutiple summaries per day this will make unique in QBO docnumber field
 inputs | true | the inputs to run your job excluding any access tokens.
 je_date | true | the report date from the input.  
 je_type | true | The template name from the input.
@@ -337,7 +340,7 @@ When you have created your summary you can post tests to this api for inspection
 
 You will need to email the bookkeep team to request credentials.  
 
-```javscript
+```avscript
 {
   "request": {
     "url": "https://gateway.bookkeep.com/api/v1/posts",
@@ -350,8 +353,49 @@ You will need to email the bookkeep team to request credentials.
   }
   ```
 
-<aside class="warning">Everything below here is not finished yet.</aside>
-
+```javscript
+{
+ "je_type": "shopify_payments_deposit",
+ "api_version": "2020-02-04",
+ "bk_external_id": "6329",
+ "je_date": "2021-02-18",
+ "realm_id": "9130349917335986",
+ "balance_reduction": {
+  "amount": 662.75
+ },
+ "adjustment": {
+  "amount": 0
+ },
+ "bank_account_deposit": {
+  "amount": 643.23
+ },
+ "fees_reduction": {
+  "amount": 19.52
+ },
+ "loan_payment_reduction": {
+  "amount": 0
+ },
+ "other_deposit_withheld": {
+  "amount": 0
+ }
+ "currency": "USD",
+ "je_private_note": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108\n ",
+ "source_report_url": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108",
+ "inputs": {
+  "summary_date": "2021-02-20",
+  "bk_client_key": "test-3358@bookkeep.com",
+  "bk_organization_id": "K3bPA0MKeQA2",
+  "shop_domain": "maine-fly-company.myshopify.com",
+  "bk_external_id": 6329,
+  "qbo_realm_id": "9130349917335986",
+  "journal_entry_template": "shopify_payments_deposit",
+  "location": "",
+  "start_of_day": "2021-02-18T00:00:00-05:00",
+  "testing": true
+ },
+ "build_number": "unable_to_fetch"
+}
+```
 # Deposit Composition
 
 <aside class="notice">
@@ -360,29 +404,33 @@ A deposit is the same as a settlement or a payout.  We use those words interchan
 
 A deposit is an accounting posting that needs to match to the bank account. The `bank_deposit` field in `post_raw_data` is the amount that will hit the bank account. There can be other fees lines and of course also the gross amount which we calculate for the `balance_reduction`.  
 
+Name | Required? | Description
+--------- | ------- | -----------
+balance_reduction  | true | The amount the source balance is reduced in total. 
+bank_account_deposit | true | The amount deposited to the bank account.
+fees_reduction | true | Amount of fees removed for the specific deposit or potentially all the orders associated with the deposit. 
+loan_payment_reduction | false | A loan payment that was removed from the Deposit and balance.
+other_deposit_withheld | false | Optional field in case there are other items removed from deposits.  Subcategories should be used.
+inputs | true | the inputs to run your job excluding any access tokens.
+je_date | true | the report date from the input.  
+je_type | true | The template name from the input.
+currency | true | currency of the data summary
+realm_id | true | this is found in the input
+build_number | true | this is the code build that is running the job. 
+bk_external_id | true | from inputs
+currency | true | currency of the deposit.
+source_location_name  | false | The source system name for the location or channel or combination of both if available 
+source_location_id | false | A location id in the source system for the name if available
+source_report_url | true | The report in the source system that corresponds to the data in the job summary. 
+je_private_note | true | could be '' but this is the note that passes through to the entry in accounting.
+docnumber | false | Optional field in case there are mutiple deposits per day this will make unique in QBO docnumber field
+
 # Setup Script Composition
 
-The setup call helps get sub...
+The setup call helps get subcategories for mapping the templates.  Subcategories would be for gross_sales, sales_tax_collected, and other_tender nodes.
 
 # Authentication
 
 
-<aside class="notice">
-This section is not updated yet.
-</aside>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
 
 
