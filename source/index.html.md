@@ -353,6 +353,8 @@ You will need to email the bookkeep team to request credentials.
   }
   ```
 
+# Deposit Composition
+
 ```javscript
 {
  "je_type": "shopify_payments_deposit",
@@ -396,7 +398,6 @@ You will need to email the bookkeep team to request credentials.
  "build_number": "unable_to_fetch"
 }
 ```
-# Deposit Composition
 
 <aside class="notice">
 A deposit is the same as a settlement or a payout.  We use those words interchangably. 
