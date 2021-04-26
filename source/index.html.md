@@ -357,45 +357,45 @@ You will need to email the bookkeep team to request credentials.
 
 ```javscript
 {
- "je_type": "shopify_payments_deposit",
- "api_version": "2020-02-04",
- "bk_external_id": "6329",
- "je_date": "2021-02-18",
- "realm_id": "9130349917335986",
- "balance_reduction": {
-  "amount": 662.75
- },
- "adjustment": {
-  "amount": 0
- },
- "bank_account_deposit": {
-  "amount": 643.23
- },
- "fees_reduction": {
-  "amount": 19.52
- },
- "loan_payment_reduction": {
-  "amount": 0
- },
- "other_deposit_withheld": {
-  "amount": 0
- }
- "currency": "USD",
- "je_private_note": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108\n ",
- "source_report_url": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108",
- "inputs": {
-  "summary_date": "2021-02-20",
-  "bk_client_key": "test-3358@bookkeep.com",
-  "bk_organization_id": "K3bPA0MKeQA2",
-  "shop_domain": "maine-fly-company.myshopify.com",
-  "bk_external_id": 6329,
-  "qbo_realm_id": "9130349917335986",
-  "journal_entry_template": "shopify_payments_deposit",
-  "location": "",
-  "start_of_day": "2021-02-18T00:00:00-05:00",
-  "testing": true
- },
- "build_number": "unable_to_fetch"
+  "je_type": "shopify_payments_deposit",
+  "api_version": "2020-02-04",
+  "bk_external_id": "6329",
+  "je_date": "2021-02-18",
+  "realm_id": "9130349917335986",
+  "balance_reduction": {
+    "amount": 662.75
+  },
+  "adjustment": {
+    "amount": 0
+  },
+  "bank_account_deposit": {
+    "amount": 643.23
+  },
+  "fees_reduction": {
+    "amount": 19.52
+  },
+  "loan_payment_reduction": {
+    "amount": 0
+  },
+  "other_deposit_withheld": {
+    "amount": 0
+  },
+  "currency": "USD",
+  "je_private_note": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108\n ",
+  "source_report_url": "https://maine-fly-company.myshopify.com/admin/payments/payouts/64298877108",
+  "inputs": {
+    "summary_date": "2021-02-20",
+    "bk_client_key": "test-3358@bookkeep.com",
+    "bk_organization_id": "K3bPA0MKeQA2",
+    "shop_domain": "maine-fly-company.myshopify.com",
+    "bk_external_id": 6329,
+    "qbo_realm_id": "9130349917335986",
+    "journal_entry_template": "shopify_payments_deposit",
+    "location": "",
+    "start_of_day": "2021-02-18T00:00:00-05:00",
+    "testing": true
+  },
+  "build_number": "unable_to_fetch"
 }
 ```
 
