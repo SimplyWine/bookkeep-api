@@ -137,7 +137,9 @@ The first part of the string is the `input.journal_entry_template`
 
 Next is the unique `input.bk_organization_id`
 
-Then a connection id or store domain from `inputs.domain` or `inputs.connection_id` do not inlude `https` or `:` or `\\` in this string or it will break. If the posting is a payout or deposit it should include the unique ID for the deposit or payout.  
+Then a connection id or store domain from `inputs.domain` or `inputs.connection_id` do not inlude `https` or `:` or `\\` in this string or it will break. 
+
+In the case of a payout or deposit the unique payout or deposit ID is used. If no deposits found on the date in question then use `no-deposit` in that space.  Note that a summary will not have any unique ids since we generate that summary in our code (there will only be one per day since its a summary) which is why we skip this space when composing a source_uuid for the summaries. 
 
 Next comes the report date in iso format eg. `2021-02-01`
 
@@ -174,6 +176,8 @@ And finally if the report is filtered to channels those channel ids should be ap
         "amount": 80
       }
   },
+  "gross_sales_note":"24 Orders 1 Refund from 2021-01-29 00:00:00 to 2021-01-30 00:00:00"
+  ,
    "shipping_income": {
     "amount": 10.00
   },
@@ -222,6 +226,7 @@ Standardized fields:
 
 Name | Required? | Description
 --------- | ------- | -----------
+{node}_note | false | A text note that will display on the line in the Journal Entry in QuickBooks Online or Xero. 
 source_location_name  | false | The source system name for the location or channel or combination of both if available 
 source_location_id | false | A location id in the source system for the name if available
 source_report_url | true | The report in the source system that corresponds to the data in the job summary. 
