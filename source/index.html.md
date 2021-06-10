@@ -99,7 +99,15 @@ There are 2 ways we group summaries.
   "short_summary": "Square Summary Boardwalk Saturday, February 6th, 2021 ${{net_sales}}",
   "post_raw_data": {...},
   "source_raw_data" {...},
-  "testing":true
+  "testing":true,
+  "transactions_summarized_count":999,
+  "summarized_net_sales":99.99,
+  "apify_run_url":"https://job-system.com/job_run_url",
+  "attachments": [{
+    "body": "\"AmazonOrderId\",\"SellerOrderId\",\"MarketplaceName\",\"PostedDate\",\"SellerSKU\",\"OrderItemId\",\"QuantityShipped\",\"CurrencyAmount\",\"CurrencyCode\",\"Type\",\"TaxCollectionModel\"\n\"https://sellercentral.amazon.com/orders-v3/order/112-5952175-4476226\",\"https://sellercentral.amazon.com/orders-v3/order/112-5952175-4476226\",\"Amazon.com\",\"2021-05-05T13:51:32Z\",\"PG-SCNT-4-FBA-2\",\"10563975951450\",\"1\",\"22.0\",\"USD\",\"Principal\",\"\"\n\"",
+    "filename": "Wednesday, May 5th, 2021.csv",
+    "content_type": "text/csv"
+  }]
 }
 ```
 
@@ -115,8 +123,9 @@ short_summary | true | a human readable summary of what we are posting for email
 post_raw_data | true | the main report and will be explained below.
 source_raw_data | true |  used for troubleshooting data it is a text field and can include things like the list of orderids, or calculation tests. Its for us to troubleshoot with live data so put anything in there that will help.  
 testing | true | When set to `true` you will a receive more detailed response with tests against the json body sent. Also when `true` the record will not be sent to accounting. 
-attachments | false | an array of object which are attachment data [body,content_type,file_name]
-
+attachments | false | an array of object which are attachment data [body,content_type,file_name]. body in plaintext
+transactions_summarized_count| false | count of orders and refunds summarized add refund count to orders.
+summarized_net_sales| false| the net sales (gross sales - discounts - refunds) for this report. 
 
 <aside class="notice">
 deposit not found should still create an entry in gateway with post_raw_data. The `source_uuid` will not have a deposit id which is ok.  The `post_raw_data` should show amount=0 and the  `short_summary` will say "no deposit today"  at the end.
@@ -162,6 +171,7 @@ And finally if the report is filtered to channels those channel ids should be ap
   "api_version": "2020-02-04",
   "build_number": "0.1.383",
   "bk_external_id": 4584,
+  "job_run_url":"https://this_is_the_job_run.com/runid",
   "source_report_url": "my-source-system.com/comapre-numbers-to-this-report.html",
   "source_location_name": "Name of this location from source system",
   "source_location_id": "Source system id for this location",
@@ -239,7 +249,9 @@ currency | true | currency of the data summary
 realm_id | true | this is found in the input
 build_number | true | this is the code build that is running the job. 
 bk_external_id | true | from inputs
-
+job_run_url | false| the apify job url or other job url for this post_raw_data so we can refer back to it
+transactions_summarized_count | true | total orders or transactions summarized for this summary and includes refunds
+summarized_net_sales | true | total net sales summarized if this is a sales summary if not then 0
 
 ## Numbers should balance
 
