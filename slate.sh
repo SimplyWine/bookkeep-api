@@ -36,7 +36,6 @@ run_serve() {
 
 run_build() {
   bundle exec middleman build --clean
-  cp _headers build/
 }
 
 parse_args() {
