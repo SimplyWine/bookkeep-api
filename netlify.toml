@@ -1,4 +1,4 @@
-[[headers]]
-    for = "/*"
-    [headers.values]
-        Basic-Auth = "fred:flintstone foo:bar"
+#[[headers]]
+#    for = "/*"
+#    [headers.values]
+#        Basic-Auth = "fred:flintstone foo:bar"
