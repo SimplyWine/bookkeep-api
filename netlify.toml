@@ -1,4 +1,4 @@
-#[[headers]]
-#    for = "/*"
-#    [headers.values]
-#        Basic-Auth = "fred:flintstone foo:bar"
+[[headers]]
+    for = "/*"
+    [headers.values]
+        Basic-Auth = "marketman:ij?x(L*&e springbig:+C/l!-$!g% bkdevteam:MB*BfR.j?"
