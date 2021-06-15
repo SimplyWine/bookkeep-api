@@ -5,8 +5,6 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -21,6 +19,8 @@ code_clipboard: true
 Welcome to the documentation for bookkeep.com's accounting integration platform.
 
 This example API documentation page was created with [Slate](https://github.com/slatedocs/slate).
+
+Note that this is a work in progress and only available to early partners.  
 
 # Summary Composition
 
@@ -284,6 +284,18 @@ In countries like canada where change doesn't go to the penny and swedish roundi
 <aside class="notice">
 You should build tests on your `post_raw_data` field to check numbers before you send.  
 </aside>
+
+## Extra Helpful Info
+<aside class="notice"
+Posting summary information can be disorienting when it appears as a journal entry with no context. So to help with this situation, we need to add context.  The places to do this are in the `je_private_note` the `source_report_url` and in any node filed with `_note` attached.  In addition, adding an attachment of a csv file with all transactions summarized is extremely helpful. 
+
+Examples of extra helpful context are:
+The url of a report specifically for the date period of the summary and the currency and time zone so that it matches exactly to the summary.  That url should go into `source_report_url` and also into `je_private_note`. 
+Adding a `_note` to any node will add that text next to the exact number.  A great place to use this is for deposits and expected deposits.  An example of a helpful entry is below. 
+
+`Gross Amount $418.34 from 12 transactions from 2021-06-13 05:08 to 2021-06-13 21:09`
+</aside>
+
 
 
 Test to build:
