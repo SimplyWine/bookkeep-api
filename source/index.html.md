@@ -294,6 +294,7 @@ The url of a report specifically for the date period of the summary and the curr
 Adding a `_note` to any node will add that text next to the exact number.  A great place to use this is for deposits and expected deposits.  An example of a helpful entry is below. 
 
 `Gross Amount $418.34 from 12 transactions from 2021-06-13 05:08 to 2021-06-13 21:09`
+
 </aside>
 
 
