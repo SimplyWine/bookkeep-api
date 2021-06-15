@@ -286,7 +286,7 @@ You should build tests on your `post_raw_data` field to check numbers before you
 </aside>
 
 ## Extra Helpful Info
-<aside class="notice"
+<aside class="notice">
 Posting summary information can be disorienting when it appears as a journal entry with no context. So to help with this situation, we need to add context.  The places to do this are in the `je_private_note` the `source_report_url` and in any node filed with `_note` attached.  In addition, adding an attachment of a csv file with all transactions summarized is extremely helpful. 
 
 Examples of extra helpful context are:
