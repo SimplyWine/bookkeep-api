@@ -465,4 +465,24 @@ The setup call helps get subcategories for mapping the templates.  Subcategories
 
 
 
+## Find next banking day
 
+This API can be used to find the next banking day. It uses [Calendarific](https://calendarific.com/) API under the hood. The value of countryStateCode should be combination of country-state in iso-3166 format. For example, "US-NY". "isoDate" parameter is the date in ISO 9601 format. Example 2021-10-22.
+Request method is get.
+
+`https://app.bookkeep.com/api/v2/utils/bank-holiday/${countryStateCode}/${isoDate}`
+
+You will need to email the bookkeep team to request credentials.
+
+```javascript
+const apiUrl = `https://app.bookkeep.com/api/v2/utils/bank-holiday/us-ny/2022-10-22`;
+const res = await fetch(apiUrl.toString(), {
+    method: 'get',
+    headers: {
+        "Content-Type": "application/json",
+        "cache-control": "no-cache",
+        "Authorization": `Basic ${Buffer.from(`${process.env.BOOKKEEP_APP_KEY}:''`, 'utf8').toString('base64')}`
+    }
+});
+const result = await res.json();
+```
